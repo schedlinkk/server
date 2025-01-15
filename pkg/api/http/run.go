@@ -1,10 +1,12 @@
 package http
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/schedlinkk/server/pkg/config"
+	"github.com/schedlinkk/server/pkg/db/mngdb"
 )
 
 func Run() error {
@@ -13,6 +15,16 @@ func Run() error {
 	if err := config.Load(); err != nil {
 		return err
 	}
+
+	if err := mngdb.Connect(); err != nil {
+		return fmt.Errorf("Failed to connect to MongoDB: %v", err)
+	}
+	defer func() {
+		if err := mngdb.Disconnect(); err != nil {
+			log.Printf("Failed to disconnect from MongoDB: %v", err)
+		}
+
+	}()
 
 	mux := http.NewServeMux()
 

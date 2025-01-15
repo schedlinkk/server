@@ -11,9 +11,9 @@ func Load() error {
 		return err
 	}
 
-	mongoCS := os.Getenv("MONGO_STRING")
+	mongoURI := os.Getenv("MONGO_URI")
 
-	config.MongoString = mongoCS
+	config.MongoURI = mongoURI
 
 	return nil
 

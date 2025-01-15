@@ -3,9 +3,9 @@ package config
 var config Configuration
 
 type Configuration struct {
-	MongoString string
+	MongoURI string
 }
 
-func MongoString() string {
-	return config.MongoString
+func MongoURI() string {
+	return config.MongoURI
 }
