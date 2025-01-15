@@ -17,7 +17,7 @@ func Simple(next func(w http.ResponseWriter, r *http.Request)) http.Handler {
 		log.Printf("%s logged in.", cookie.Value)
 
 		ctx := r.Context()
-		ctx = context.WithValue(ctx, "uid", uid)
+		ctx = context.WithValue(ctx, UUID, uid)
 		r = r.WithContext(ctx)
 
 		next(w, r)
