@@ -14,7 +14,7 @@ func Handler() http.Handler {
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	uid, ok := ctx.Value("uid").(string)
+	uid, ok := ctx.Value(auth.UUID).(string)
 	if !ok {
 		w.WriteHeader(http.StatusUnauthorized)
 		return
