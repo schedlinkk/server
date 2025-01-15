@@ -2,6 +2,7 @@ package hello
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/schedlinkk/server/pkg/auth"
@@ -21,7 +22,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	s := fmt.Sprintf("Hello, %s\n", uid)
-	w.Write([]byte(s))
-	return
-
+	if _, err := w.Write([]byte(s)); err != nil {
+		log.Printf("Failed to write response to %s", uid)
+	}
 }
