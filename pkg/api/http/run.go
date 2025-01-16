@@ -2,12 +2,10 @@ package http
 
 import (
 	"fmt"
-	"log"
-	"net/http"
-
-	"github.com/schedlinkk/server/pkg/api/http/hello"
 	"github.com/schedlinkk/server/pkg/config"
 	"github.com/schedlinkk/server/pkg/db/mngdb"
+	"log"
+	"net/http"
 )
 
 func Run() error {
@@ -27,12 +25,9 @@ func Run() error {
 
 	}()
 
-	mux := http.NewServeMux()
-	mux.Handle("/hello", hello.Handler())
-
 	s := http.Server{
 		Addr:    ":8888",
-		Handler: mux,
+		Handler: Handler(), // http.Handler function return global http handler.
 	}
 
 	log.Printf("Starting a server...\n")

@@ -6,15 +6,17 @@ import (
 	"net/http"
 
 	"github.com/schedlinkk/server/pkg/auth"
+	"github.com/schedlinkk/server/pkg/services/users"
 )
 
 func Handler() http.Handler {
-	return auth.Simple(handler)
+	h := http.HandlerFunc(handler)
+	return auth.Simple(h)
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	uid, ok := ctx.Value(auth.UUID).(string)
+	uid, ok := ctx.Value(auth.UID).(users.UID)
 	if !ok {
 		w.WriteHeader(http.StatusUnauthorized)
 		return
