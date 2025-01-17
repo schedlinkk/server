@@ -59,5 +59,4 @@ func (uc *UsersController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	case "/info":
 		uc.FetchUser(w, r)
 	}
-	return
 }
