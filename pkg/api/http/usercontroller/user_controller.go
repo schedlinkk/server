@@ -1,4 +1,4 @@
-package controllers
+package usercontroller
 
 import (
 	"encoding/json"
@@ -9,11 +9,11 @@ import (
 	"github.com/schedlinkk/server/pkg/services/users"
 )
 
-func NewUserControllerWithSimpleAuth(us *users.UserService) http.Handler {
-	return auth.Simple(NewUserController(us))
+func NewWithSimpleAuth(us *users.UserService) http.Handler {
+	return auth.Simple(New(us))
 }
 
-func NewUserController(us *users.UserService) *UserController {
+func New(us *users.UserService) *UserController {
 	uc := &UserController{s: us}
 	return uc
 }
