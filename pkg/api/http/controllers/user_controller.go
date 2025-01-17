@@ -9,20 +9,20 @@ import (
 	"github.com/schedlinkk/server/pkg/services/users"
 )
 
-func NewUserscontrollerWithSimpleAuth(us *users.UserService) http.Handler {
-	return auth.Simple(NewUsersController(us))
+func NewUserControllerWithSimpleAuth(us *users.UserService) http.Handler {
+	return auth.Simple(NewUserController(us))
 }
 
-func NewUsersController(us *users.UserService) *UsersController {
-	uc := &UsersController{s: us}
+func NewUserController(us *users.UserService) *UserController {
+	uc := &UserController{s: us}
 	return uc
 }
 
-type UsersController struct {
+type UserController struct {
 	s *users.UserService
 }
 
-func (uc *UsersController) FetchUser(w http.ResponseWriter, r *http.Request) {
+func (uc *UserController) FetchUser(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	uid, ok := ctx.Value(auth.UID).(users.UID)
 	if !ok {
@@ -53,7 +53,7 @@ func (uc *UsersController) FetchUser(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func (uc *UsersController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (uc *UserController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
 	switch path {
 	case "/info":

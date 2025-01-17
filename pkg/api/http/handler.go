@@ -11,7 +11,7 @@ import (
 func Handler() *http.ServeMux {
 	userStore := users.NewUserStoreStubWithSampleData()
 	userService := users.NewUserServiceWithStore(userStore)
-	userController := controllers.NewUserscontrollerWithSimpleAuth(userService)
+	userController := controllers.NewUserControllerWithSimpleAuth(userService)
 
 	mux := http.NewServeMux()
 	mux.Handle("/hello", hello.Handler())
